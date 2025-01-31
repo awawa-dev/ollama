@@ -16,7 +16,7 @@ jobs:
   # CPU generation step
   generate-windows-cpu:
     environment: release
-    runs-on: windows
+    runs-on: windows-2019
     env:
       KEY_CONTAINER: ${{ vars.KEY_CONTAINER }}
     steps:
@@ -53,7 +53,7 @@ jobs:
   # ROCm generation step
   generate-windows-rocm:
     environment: release
-    runs-on: windows
+    runs-on: windows-2019
     env:
       KEY_CONTAINER: ${{ vars.KEY_CONTAINER }}
     steps:
@@ -110,7 +110,7 @@ jobs:
   # CUDA generation step
   generate-windows-cuda:
     environment: release
-    runs-on: windows
+    runs-on: windows-2019
     strategy:
       matrix:
         cuda:
@@ -192,7 +192,7 @@ jobs:
   # Import the prior generation steps plus the full arm64 build, and build the final windows assets
   build-windows:
     environment: release
-    runs-on: windows
+    runs-on: windows-2019
     needs:
       - generate-windows-cuda
       - generate-windows-rocm
@@ -286,7 +286,7 @@ jobs:
   release:
     needs:
       - build-windows
-    runs-on: linux
+    runs-on: ubuntu-22.04
     environment: release
     permissions:
       contents: write
